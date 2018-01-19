@@ -14,6 +14,8 @@ import 'codemirror/lib/codemirror.css';
 import 'codemirror/addon/lint/lint.css';
 import './app.css';
 
+import Result from './result';
+
 import jsonlint from './lib/jsonlint';
 
 window.jsonlint = jsonlint;
@@ -28,6 +30,7 @@ const CodeMirror = styled(UnControlled)`
   flex-grow: 9;
   border: 1px solid #777;
   height: 100%;
+  overflow: hidden;
   .CodeMirror {
     height: 100%;
   }
@@ -50,6 +53,7 @@ export default class App extends Component {
   }
 
   render() {
+    const { dataStore } = this.props;
     return (
       <AppWrapper>
         <CodeMirror
@@ -67,6 +71,7 @@ export default class App extends Component {
           onChange={this.handleCodeChange}
           editorDidMount={this.handleCodeMirrorMounted}
         />
+        <Result dataStore={dataStore} />
       </AppWrapper>
     );
   }

@@ -8,7 +8,7 @@ import generateReqstr from './plugin-quest/reqstr.es';
 const translate = (str, ...args) => {
   const found = zhCNLocale[str];
   if (!found) {
-    return '';
+    return str;
   }
   if (isString(found)) {
     return sprintf(found, ...args);
@@ -24,10 +24,16 @@ class DataStore {
   @computed get quests() {
     try {
       const data = JSON.parse(this.data);
-      return map(data, quest => ({
-        ...quest,
-        condition: reqstr(quest.requirements),
-      }));
+      return map(data, (quest) => {
+        try {
+          return {
+            ...quest,
+            condition: reqstr(quest.requirements),
+          };
+        } catch (e) {
+          return quest;
+        }
+      });
     } catch (e) {
       console.error(e); // eslint-disable-line no-console
       return [];
