@@ -1,0 +1,3 @@
+[submodule "src/plugin-quest"]
+	path = src/plugin-quest
+	url = https://github.com/poooi/plugin-quest.git
