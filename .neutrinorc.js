@@ -1,3 +1,5 @@
+const loaderMerge = require('@neutrinojs/loader-merge');
+
 module.exports = {
   use: [
     '@neutrinojs/airbnb',
@@ -5,10 +7,26 @@ module.exports = {
       '@neutrinojs/react',
       {
         html: {
-          title: 'plugin-quest-devtool'
+          title: 'Plugin Quest Devtool'
+        }
+      },
+    ],
+    (neutrino) => neutrino.use(loaderMerge('compile', 'babel'), {
+      plugins: [
+        'transform-decorators-legacy',
+        'transform-decorators',
+        'transform-class-properties',
+      ],
+      env: {
+        development: {
+          plugins: [
+            'transform-decorators-legacy',
+            'transform-decorators',
+            'transform-class-properties',
+          ],
         }
       }
-    ],
-    '@neutrinojs/jest'
+    }),
+    '@neutrinojs/jest',
   ]
 };
