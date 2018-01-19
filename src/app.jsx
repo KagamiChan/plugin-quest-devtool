@@ -27,7 +27,7 @@ const AppWrapper = styled.div`
 `;
 
 const CodeMirror = styled(UnControlled)`
-  flex-grow: 9;
+  flex: 9;
   border: 1px solid #777;
   height: 100%;
   overflow: hidden;
