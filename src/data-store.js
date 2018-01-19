@@ -1,19 +1,16 @@
 import { observable, computed } from 'mobx';
-import { map, isString } from 'lodash';
-import { sprintf } from 'sprintf-js';
+import { map, isString, get } from 'lodash';
+import { vsprintf } from 'sprintf-js';
 
 import zhCNLocale from './plugin-quest/assets/i18n/zh-CN.json';
 import generateReqstr from './plugin-quest/reqstr.es';
 
 const translate = (str, ...args) => {
-  const found = zhCNLocale[str];
-  if (!found) {
-    return str;
-  }
+  const found = get(zhCNLocale, str);
   if (isString(found)) {
-    return sprintf(found, ...args);
+    return vsprintf(found, args);
   }
-  return found;
+  return str.includes('.') ? found : str;
 };
 
 const reqstr = generateReqstr(translate);
