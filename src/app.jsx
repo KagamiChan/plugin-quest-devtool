@@ -8,10 +8,15 @@ import 'codemirror/addon/edit/matchbrackets';
 import 'codemirror/addon/lint/lint';
 import 'codemirror/addon/lint/json-lint';
 import 'codemirror/addon/selection/active-line';
+import 'codemirror/addon/search/search';
+import 'codemirror/addon/search/searchcursor';
+import 'codemirror/addon/search/jump-to-line';
+import 'codemirror/addon/dialog/dialog';
 
 import 'antd/dist/antd.css';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/addon/lint/lint.css';
+import 'codemirror/addon/dialog/dialog.css';
 import './app.css';
 
 import Result from './result';
