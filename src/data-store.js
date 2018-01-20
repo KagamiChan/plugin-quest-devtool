@@ -1,17 +1,19 @@
 import { observable, computed } from 'mobx';
-import { map, isString, get } from 'lodash';
-import { vsprintf } from 'sprintf-js';
+import { map } from 'lodash';
+import I18n from 'i18n-2';
 
 import zhCNLocale from './plugin-quest/assets/i18n/zh-CN.json';
 import generateReqstr from './plugin-quest/reqstr.es';
 
-const translate = (str, ...args) => {
-  const found = get(zhCNLocale, str);
-  if (isString(found)) {
-    return vsprintf(found, args);
-  }
-  return str.includes('.') ? found : str;
-};
+const i18n = new I18n({
+  locales: {
+    'zh-CN': zhCNLocale,
+  },
+  defaultLocale: 'zh-CN',
+  devMode: false,
+});
+
+const translate = i18n.__.bind(i18n); // eslint-disable-line
 
 const reqstr = generateReqstr(translate);
 
