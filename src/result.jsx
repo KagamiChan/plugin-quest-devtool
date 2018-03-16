@@ -11,6 +11,8 @@ const ResultWrapper = styled.div`
   flex: 7;
   min-width: 600px;
   padding: 0 20px;
+  height: 100%;
+  overflow: auto;
 `;
 
 const Text = styled.div`
