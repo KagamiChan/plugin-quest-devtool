@@ -139,11 +139,13 @@ export default class Result extends Component {
                 <Divider />
                 <Divider>结构解析</Divider>
                 <Divider>原始数据</Divider>
-                <code>
-                  {
-                    JSON.stringify(keyedQuests[pane.title] || {}, null, '\t')
-                  }
-                </code>
+                <pre>
+                  <code>
+                    {
+                      JSON.stringify(keyedQuests[pane.title] || {}, null, 2)
+                    }
+                  </code>
+                </pre>
               </TabPane>
             ))
           }
