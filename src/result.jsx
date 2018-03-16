@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { observer, PropTypes } from 'mobx-react';
 import styled from 'styled-components';
 import { Tabs, Select, Divider, Tag } from 'antd';
-import { get, keyBy } from 'lodash';
+import { get, keyBy, zip } from 'lodash';
 
 const { TabPane } = Tabs;
 const { Option } = Select;
@@ -132,14 +132,24 @@ export default class Result extends Component {
                     get(keyedQuests, [pane.title, 'condition'], '解析失败')
                   }
                 </Text>
+                <Divider />
                 <Text>
                   <Tag>原文</Tag>
                   {
                     get(keyedQuests, [pane.title, 'detail'])
                   }
                 </Text>
-                <Divider />
                 <Divider>结构解析</Divider>
+                <div>
+                  <Tag>基础奖励</Tag>
+                  {
+                    zip(
+                      ['油 ', ' 弹 ', ' 钢 ', ' 铝 '],
+                      ['reward_fuel', 'reward_ammo', 'reward_steel', 'reward_bauxite']
+                      .map(name => get(keyedQuests, [pane.title, name], '解析失败')),
+                    )
+                  }
+                </div>
                 <Divider>原始数据</Divider>
                 <pre>
                   <code>
