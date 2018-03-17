@@ -24,6 +24,13 @@ module.exports = {
             'transform-decorators',
             'transform-class-properties',
           ],
+        },
+        production: {
+          plugins: [
+            'transform-decorators-legacy',
+            'transform-decorators',
+            'transform-class-properties',
+          ],
         }
       }
     }),
