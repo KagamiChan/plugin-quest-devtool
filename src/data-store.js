@@ -22,7 +22,7 @@ class DataStore {
 
   @computed get quests() {
     try {
-      const data = JSON.parse(this.data);
+      const data = JSON.parse(this.data || '[]');
       return map(data, (quest) => {
         try {
           return {
