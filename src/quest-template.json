@@ -1,0 +1,38 @@
+[
+  {
+    "game_id": 100,
+    "wiki_id": "A00",
+    "category": 1,
+    "type": 1,
+    "name": "任务名称",
+    "detail": "任务描述",
+    "reward_fuel": 0,
+    "reward_ammo": 0,
+    "reward_steel": 0,
+    "reward_bauxite": 0,
+    "reward_other": [
+      {
+        "name": "開発資材|高速建造材|改修資材|...",
+        "category": "艦娘|家具|装備",
+        "amount": 1
+      },
+      {
+        "choices": []
+      }
+    ],
+    "prerequisite": [],
+    "requirements": {
+      "category": "and|equipexchange|excercise|expedition|fleet|modelconversion|modernization|scrapequipment|simple|sink|sortie|...",
+      "times": 1,
+      "map": ["1-1"],
+      "boss": true,
+      "result": "A",
+      "groups": [
+        {
+          "ship": "艦|駆逐|軽巡|重巡|空母|戦艦|水母|高速艦|航戦|航巡|潜水母艦|他の艦",
+          "amount": 1
+        }
+      ]
+    }
+  }
+]

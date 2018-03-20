@@ -3,6 +3,8 @@ import { observer, PropTypes } from 'mobx-react';
 import styled from 'styled-components';
 import { Button } from 'antd';
 
+import questTemplate from './quest-template.json';
+
 const ToolbarWrapper = styled.div`
   height: 50px;
   display: flex;
@@ -45,6 +47,10 @@ export default class Toolbar extends Component {
     this.props.dataStore.update(formatted);
   }
 
+  handleLoadTemplate = () => {
+    this.props.dataStore.update(JSON.stringify(questTemplate, null, 2));
+  }
+
   render() {
     return (
       <ToolbarWrapper>
@@ -62,6 +68,12 @@ export default class Toolbar extends Component {
           loading={this.state.fetchLoading}
         >
           加载线上数据
+        </Button>
+        <Button
+          disabled={!!this.props.dataStore.data}
+          onClick={this.handleLoadTemplate}
+        >
+          加载任务模板
         </Button>
         <Button onClick={this.handleFormat}>格式化</Button>
       </ToolbarWrapper>
