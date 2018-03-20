@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import styled from 'styled-components';
 import { observer, PropTypes } from 'mobx-react';
-import { UnControlled } from 'react-codemirror2';
+import { Controlled } from 'react-codemirror2';
 
 import 'codemirror/mode/javascript/javascript';
 import 'codemirror/addon/edit/matchbrackets';
@@ -20,6 +20,7 @@ import 'codemirror/addon/dialog/dialog.css';
 import './app.css';
 
 import Result from './result';
+import Toolbar from './toolbar';
 
 import jsonlint from './lib/jsonlint';
 
@@ -31,11 +32,17 @@ const AppWrapper = styled.div`
   padding: 20px;
 `;
 
-const CodeMirror = styled(UnControlled)`
+const Left = styled.div`
   flex: 9;
+  width: 0;
+  display: flex;
+  flex-direction: column;
+`;
+
+const CodeMirror = styled(Controlled)`
+  flex: 1;
   border: 1px solid #777;
-  height: 100%;
-  overflow: hidden;
+  overflow: auto;
   .CodeMirror {
     height: 100%;
   }
@@ -61,21 +68,24 @@ export default class App extends Component {
     const { dataStore } = this.props;
     return (
       <AppWrapper>
-        <CodeMirror
-          value=""
-          options={{
-            mode: 'application/json',
-            lineNumbers: true,
-            matchBrackets: true,
-            lint: true,
-            gutters: ['CodeMirror-lint-markers'],
-            indentWithTabs: true,
-            tabSize: 2,
-            styleActiveLine: true,
-          }}
-          onChange={this.handleCodeChange}
-          editorDidMount={this.handleCodeMirrorMounted}
-        />
+        <Left>
+          <CodeMirror
+            value={dataStore.data}
+            options={{
+              mode: 'application/json',
+              lineNumbers: true,
+              matchBrackets: true,
+              lint: true,
+              gutters: ['CodeMirror-lint-markers'],
+              indentWithTabs: true,
+              tabSize: 2,
+              styleActiveLine: true,
+            }}
+            onBeforeChange={this.handleCodeChange}
+            editorDidMount={this.handleCodeMirrorMounted}
+          />
+          <Toolbar dataStore={dataStore} />
+        </Left>
         <Result dataStore={dataStore} />
       </AppWrapper>
     );
