@@ -36,6 +36,15 @@ export default class Toolbar extends Component {
     }
   }
 
+  handleFormat = () => {
+    const { data } = this.props.dataStore;
+    if (!data) {
+      return;
+    }
+    const formatted = JSON.stringify(JSON.parse(data), null, 2);
+    this.props.dataStore.update(formatted);
+  }
+
   render() {
     return (
       <ToolbarWrapper>
@@ -54,6 +63,7 @@ export default class Toolbar extends Component {
         >
           加载线上数据
         </Button>
+        <Button onClick={this.handleFormat}>格式化</Button>
       </ToolbarWrapper>
     );
   }
